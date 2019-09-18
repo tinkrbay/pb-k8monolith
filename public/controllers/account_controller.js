@@ -281,7 +281,7 @@ app.factory('LoginService',
 
         service.Login = function (username, password) {
 
-$http.get('http://pb-user-api.cfapps.io/users/?userId='+username).success(function(response) {
+$http.get('http://pb-k8monolith.thecloudgarage.com:3000/users/?userId='+username).success(function(response) {
 if(response != null && angular.fromJson(response).password==password){
     $cookies.put("email",username)
     $location.path("/welcome")
