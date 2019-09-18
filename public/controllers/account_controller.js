@@ -27,7 +27,7 @@ $scope.newuser= {
 $scope.register = function() {
 $http({
           method  : 'POST',
-          url     : 'http://pb-user-api.cfapps.io/users',
+          url     : 'http://pb-k8monolith.thecloudgarage:3000/users',
           data    : $scope.newuser
          })
  .success(function(response) {
@@ -61,7 +61,7 @@ $cookies.remove('email');
 //ALSO NOTE THAT THIS PARTICULAR ACCOUNT BALANCE FUNCTION APPEARS IN NG INIT ON WELCOME PAGE TO INITIALIZE THE PAGE WITH THE BALANCE
 
 $scope.account_balance = function() {
-         $http.get('http://pb-balance-api.cfapps.io/balance/?myAccountId='+$cookies.get('email')).success(function(response) {
+         $http.get('http://pb-k8monolith.thecloudgarage:3000/balance/?myAccountId='+$cookies.get('email')).success(function(response) {
          $scope.mybalance = response;
          var mybalanceid = [];
          var mybalance = [];
@@ -121,11 +121,11 @@ $scope.my_balance = '';
                     if ($scope.form.id == -1) {
                         //Id is absent so add employee - POST operation
                         method = "POST";
-                        url = 'http://pb-payee-api.cfapps.io/payee';
+                        url = 'http://pb-k8monolith.thecloudgarage:3000/payee';
                     } else {
                         //If Id is present, it's edit operation - PUT operation
                         method = "PUT";
-                        url = 'http://pb-payee-api.cfapps.io/payee/' + $scope.form.id;
+                        url = 'http://pb-k8monolith.thecloudgarage:3000/payee/' + $scope.form.id;
                     }
 
                     $http({
@@ -147,7 +147,7 @@ location.reload()
                 $scope.removePayee = function(payee) {
                     $http({
                         method : 'DELETE',
-                        url : 'http://pb-payee-api.cfapps.io/payee/' + payee._id
+                        url : 'http://pb-k8monolith.thecloudgarage:3000/payee/' + payee._id
                     }).success(function(response) {
 location.reload()
 });
@@ -177,7 +177,7 @@ location.reload()
 //DISPLAY PAYEES. HEREIN WE HAVE ALSO ADDED A SCOPE.WELCOME AND RETRIEVING THE SET COOKIE TO SET AS A WELCOME NAME MESSAGE.
 
 $scope.init_payee = function() {
-         $http.get('http://pb-payee-api.cfapps.io/payee/?payeeAddress='+$cookies.get('email')).success(function(response) {
+         $http.get('http://pb-k8monolith.thecloudgarage:3000/payee/?payeeAddress='+$cookies.get('email')).success(function(response) {
          $scope.payees = response;
 	 $scope.welcome = $cookies.get('email');
             }).then(_success);
@@ -222,7 +222,7 @@ $scope.init_payee = function() {
 $scope.payPayee = function() {
 $http({
           method  : 'POST',
-          url     : 'http://pb-transfer-api.cfapps.io/transfer',
+          url     : 'http://pb-k8monolith.thecloudgarage:3000/transfer',
           data    : $scope.payform
          })
  .then (function success(response) {
@@ -237,7 +237,7 @@ _id : $scope.my_balanceid,
 var mybalanceid = mybalanceid;
 $http({
           method  : 'PUT',
-          url     : 'http://pb-balance-api.cfapps.io/balance/'+$scope.my_balanceid,
+          url     : 'http://pb-k8monolith.thecloudgarage:3000/balance/'+$scope.my_balanceid,
           data    : $scope.myAccountBalance
          })
 })
@@ -253,7 +253,7 @@ location.reload()
 //NOTE THE USE OF COOKIES
 
 $scope.account_transactions = function() {
-         $http.get('http://pb-transfer-api.cfapps.io/transfer/?myAccountId='+$cookies.get('email')).success(function(response) {
+         $http.get('http://pb-k8monolith.thecloudgarage:3000/transfer/?myAccountId='+$cookies.get('email')).success(function(response) {
          $scope.mytransactions = response;
 	             }).then(_success);
 }
