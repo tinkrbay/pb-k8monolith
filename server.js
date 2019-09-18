@@ -12,7 +12,7 @@ var express = require('express'),
 app.use(express.static(__dirname + '/public'));
 
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost:27017/personal_banking'); 
+mongoose.connect('mongodb://mongodb.thecloudgarage.com:27017/personal_banking'); 
 
 app.use(cors())
 app.use(bodyParser.urlencoded({ extended: true }));
